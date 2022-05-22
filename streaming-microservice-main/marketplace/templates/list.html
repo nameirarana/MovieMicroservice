@@ -1,0 +1,18 @@
+<!-- homepage.html -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Netflix</title>
+    </head>
+    <body>
+        <h1>My List</h1>
+        <form>
+        <ul>
+            {% for movie in movie_list %}
+            <li>{{ movie.title }}</li>
+            <a href = "{{url_for('remove_from_list', movieid = movie.id)}}">Remove</a>
+            {% endfor %}
+        </ul>
+        </form>
+    </body>
+

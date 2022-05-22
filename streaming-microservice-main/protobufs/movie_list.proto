@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+
+
+
+message BoolValue {
+    bool value = 1;
+}
+
+message Movie {
+    int32 id = 1;
+    string title = 2;
+}
+
+message ListItem {
+    int32 user_id = 1;
+    Movie movie = 2;
+}
+
+message MovieListRequest {
+    int32 user_id = 1;
+
+}
+
+message MovieListResponse {
+    repeated Movie movie_list = 1;
+}
+
+
+service List {
+    rpc GetList (MovieListRequest) returns (MovieListResponse);
+    rpc AddToList (ListItem) returns (BoolValue);
+    rpc RemoveFromList (ListItem) returns (BoolValue);
+}

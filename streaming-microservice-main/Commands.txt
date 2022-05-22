@@ -1,0 +1,39 @@
+python -m venv venv
+
+venv\Scripts\activate.bat
+
+python -m pip install -r recommendations/requirements.txt
+
+cd recommendations
+
+python -m grpc_tools.protoc -I ../protobufs --python_out=. --grpc_python_out=. ../protobufs/recommendations.proto
+
+
+Server:
+
+from recommendations_pb2 import MovieCategory, RecommendationRequest
+
+import grpc
+
+from recommendations_pb2_grpc import RecommendationsStub
+
+channel = grpc.insecure_channel("localhost:50051")
+
+client = RecommendationsStub(channel)
+
+request = RecommendationRequest(user_id=1,category=MovieCategory.SCIENCE_FICTION, max_results=3)
+
+client.Recommend(request)
+
+Client:
+
+python recommendations.py
+
+for docker:
+
+docker-compose build
+docker-compose up
+
+for kubernetes:
+
+kubectl apply -f kubernetes.yml

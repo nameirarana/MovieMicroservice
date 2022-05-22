@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recommendations</title>
+</head>
+    <body>
+        <form name="search" action="/send_data" method="POST">
+            <select name= "categories" method="GET" action="/">
+                {% for category in categories %}
+                <option value= "{{category}}" SELECTED>{{category}}</option>"
+                {% endfor %}
+                <option value="none" selected disabled hidden>Select an Option</option>
+            </select>
+            <input type="submit" value="Submit"  name = "category"/>
+        </form>
+    </body>
+</html>
